@@ -1,0 +1,54 @@
+﻿@page "/databindingExample"
+
+@using System.Threading;
+
+<h3>Manually Trigger UI Refresh</h3>
+
+Counter: @CurrentCount
+<br />
+<br />
+
+@if (isTimerStopped)
+{
+    <button onclick=@Countdown>Start Countdown</button>
+}
+else
+{
+    <button onclick=@ResetTimer>Reset Countdown</button>
+}
+
+
+@functions {
+    [Parameter]
+    public int CurrentCount { get; set; } = 15;
+
+    private Timer _timer;
+    private bool isTimerStopped = true;
+
+    void Countdown()
+    {
+        isTimerStopped = false;
+        _timer = new Timer(TimeCallBack, null, 0, 500);
+    }
+
+    void TimeCallBack(object state)
+    {
+        if (CurrentCount > 0)
+        {
+            CurrentCount--;
+            this.StateHasChanged();
+        }
+        else
+        {
+            ResetTimer();
+            this.StateHasChanged();
+        }
+    }
+
+    void ResetTimer()
+    {
+        _timer.Dispose();
+        CurrentCount = 15;
+        isTimerStopped = true;
+    }
+} 
