@@ -4,4 +4,12 @@
 
 Welcome to your new app.
 
+<input type="text" bind="@Text"/>
+
+@Text
+
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+@functions {
+    public string Text { get; set; }
+}
