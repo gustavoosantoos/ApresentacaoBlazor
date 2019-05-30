@@ -11,8 +11,16 @@
     [Parameter]
     public int CurrentCount { get; set; } = 0;
 
-    void IncrementCount()
+    [Parameter]
+    public EventCallback<string> LimitReached { get; set; }
+
+    async Task IncrementCount()
     {
         CurrentCount++;
+
+        if (CurrentCount > 10)
+        {
+            await LimitReached.InvokeAsync($"O contador atingiu o limite.");
+        }
     }
 }

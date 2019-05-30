@@ -4,11 +4,13 @@
 
 Welcome to your new app.
 
-<input type="text" bind="@Text"/>
+<input type="text" bind-value-oninput="@Text"/>
 
 @Text
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<Counter CurrentCount="5" LimitReached="@(e => Console.WriteLine(e))"></Counter>
 
 @functions {
     public string Text { get; set; }
