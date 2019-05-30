@@ -1,0 +1,29 @@
+﻿@typeparam TItem
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Subtitulo</th>
+            <th>Dados</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Items)
+        {
+            <tr>
+                <td>@Titulo(item)</td>
+                <td>@Subtitulo(item)</td>
+                <td>@Dados(item)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@functions {
+    [Parameter] public IEnumerable<TItem> Items { get; set; }
+
+    [Parameter] public RenderFragment<TItem> Titulo { get; set; }
+    [Parameter] public RenderFragment<TItem> Subtitulo { get; set; }
+    [Parameter] public RenderFragment<TItem> Dados { get; set; }
+}
